@@ -1,7 +1,42 @@
 # test-dependency-injection
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+**Dependency Injection (DI)** is a high level implementation of the *inversion of control* pattern which uses *containers*.
+
+**Dependency injection** (DI) *decouples* the pieces of your application as dependencies are not hardcoded but injected at construction time.
+
+An important benefit of DI is that it helps **testing** as you can inject *mocked dependencies* and verify calls made on those.
+
+There are two patterns related to dependency injection:
+
+- **Container Pattern**: allows objects to be configured by the container instead of the client.  A container is an object created to hold other objects that are accessed, placed and maintained with the class methods of the container. (http://best-practice-software-engineering.ifs.tuwien.ac.at/patterns/container.html).
+- **Abstract Factory**: allows an application to acquire objects and components without exposing too much information about how components fit togheter or what dependencies each component might have. (http://best-practice-software-engineering.ifs.tuwien.ac.at/patterns/factory.html)
+
+
+### How Dependency Injection has been implemented in Ember
+
+In Ember DI works through the container (https://www.emberjs.com/api/ember/2.16/classes/Container and https://github.com/emberjs/ember.js/blob/v2.16.4/packages/container/lib/container.js#L16), a birthplace of Objects.
+
+Ember provides api to deal with the container in order to register and inject a dependency on your code.
+First you need to register a dependency on the container, then you can inject the dependency.
+
+In Ember a Container must be associated with a Registry.
+
+When an Ember app is created, the first thing it does is creating a container it uses internally.
+You can see the code of the container here: https://github.com/emberjs/ember.js/blob/v2.16.4/packages/container/lib/container.js
+where we can see that the only public method is factoryFor, that given a fullName, return the corresponding factory
+
+Let's see the Registry:
+https://github.com/emberjs/ember.js/blob/v2.16.4/packages/container/lib/registry.js
+
+
+
+Ember application class uses the RegistryProxyMixin:
+https://emberjs.com/api/ember/2.16/classes/RegistryProxyMixin
+
+References:
+
+- https://martinfowler.com/articles/injection.html
+
 
 ## Prerequisites
 
